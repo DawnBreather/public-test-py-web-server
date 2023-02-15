@@ -1,11 +1,10 @@
-from wsgiref.simple_server import make_server
+from flask import Flask
 
-def app(environ, start_response):
-    status = '200 OK'
-    headers = [('Content-type', 'text/html')]
-    start_response(status, headers)
-    return [b"Hello, world!"]
+app = Flask(__name__)
 
-httpd = make_server('', 8000, app)
-print("Serving on port 8000...")
-httpd.serve_forever()
+@app.route("/")
+def hello():
+    return "Hello World!"
+
+if __name__ == "__main__":
+    app.run()
